@@ -365,7 +365,7 @@ void radio::setTXFilters(long freq) {
 
 void radio::setTXFilters(long freq){
   
-  if (freq >= 21000000L){  // the default filter is with 35 MHz cut-off
+  if (freq > 21000000L){  // the default filter is with 35 MHz cut-off
     digitalWrite(TX_LPF_A, 0);
     digitalWrite(TX_LPF_B, 0);
     digitalWrite(TX_LPF_C, 0);
@@ -375,7 +375,7 @@ void radio::setTXFilters(long freq){
     digitalWrite(TX_LPF_B, 0);
     digitalWrite(TX_LPF_C, 0);
   }
-  else if (freq >= 7000000L){
+  else if (freq > 7000000L){
     digitalWrite(TX_LPF_A, 0);
     digitalWrite(TX_LPF_B, 1);
     digitalWrite(TX_LPF_C, 0);    

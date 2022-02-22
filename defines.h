@@ -12,7 +12,7 @@
 #define USE_RF_SHIFT_STEP   // RF shift - provides stepped settings of 0, -10dB, -20dB, -30dB
 #define USE_ATTN         // RF Attenuator - based on reducing drive level of 1st IF
 #define USE_LOCK            // frequency lock
-//#define USE_IF_SHIFT        // IF shift - tone control
+#define USE_IF_SHIFT        // IF shift - tone control
 #define USE_SPOT            // CW spotting tone
 #define USE_TUNE            // Tune output
 #define USE_PDL_POL         // paddle polarity
@@ -23,5 +23,3 @@
 #define USE_AUTO_SAVE       // Periodic auto-save VFOs 
 #define USE_WINKEY          // Winkeyer (CW - tip, PTT - ring) option on paddle jack
 // #define USE_RX_ONLY         // disable all TX functions
-#define	USE_ATU100	    // Support talking to modified ATU-100 firmware
-#define	USE_ATU100_LORA     // Support talking to ATU-100 via LoRA

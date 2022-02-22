@@ -111,8 +111,8 @@ class display {
 
     void display_vfoa(const bool clear);
     void display_vfob(const bool clear);
+
     void display_cw_speed(const bool clear);
-    
     #ifdef USE_IF_SHIFT
     void display_if_shift(const bool clear);
     #endif

@@ -3,7 +3,10 @@
 #	./tools/flash $^ ${CFG_CAT_PORT} ${CFG_FLASH_BAUDRATE} ${CFG_TARGET_SUB}
 #endif
 
-install: bin/${BOARD_TAG}/ubitx-firmware/${TARGET}.hex
-	/usr/share/arduino/hardware/tools/avrdude -C/usr/share/arduino/hardware/tools/avrdude.conf \
-	-v -v -v -v -patmega328p -carduino -P${MONITOR_PORT} -b${FLASH_BAUDRATE} -D -Uflash:w:$<
+MONITOR_PORT = /dev/ttyUSB0
 
+install: bin/${BOARD_TAG}/ubitx-n8me/${TARGET}.hex
+	avrdude \
+	-v -patmega328p -carduino -P${MONITOR_PORT} -b${FLASH_BAUDRATE} -D -Uflash:w:$<
+
+#-C/usr/share/arduino/hardware/tools/avrdude.conf \

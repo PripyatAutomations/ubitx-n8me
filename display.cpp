@@ -26,14 +26,13 @@ const byte TC_TEXT_SIZE = 2;
 const byte RIT_DIGITS    = 6;
 const byte KEYPAD_DIGITS = 5;
 
-const byte VFOA_LEFT = BUTTON_WIDTH/64;
-const byte VFOA_TOP = BUTTON_HEIGHT /2;// BUTTON_HEIGHT + (BUTTON_HEIGHT - VFOA_SIZE * CHAR_HEIGHT)/2;
+const byte VFOA_LEFT = BUTTON_WIDTH;
+const byte VFOA_TOP = BUTTON_HEIGHT + (BUTTON_HEIGHT - VFOA_SIZE * CHAR_HEIGHT) / 2;
 const byte VFOA_SIZE = 3;
-const byte VFOB_SIZE = 3;
 
 const byte VFOB_LEFT = BUTTON_WIDTH * 3;
 const byte VFOB_TOP = VFOA_TOP;
-
+const byte VFOB_SIZE = VFOA_SIZE;
 
 const char * const display::mini_label[] PROGMEM = {PTT_TEXT};
 
@@ -409,11 +408,8 @@ void display::heartbeat(void) {
   const byte RECT_SIZE = 4;
   static bool on_off = false;
   on_off = !on_off;
- // disp.fillRect(0, BANNER_SIZE * CHAR_HEIGHT,
- //               RECT_SIZE, RECT_SIZE,
- //               on_off ? HB_COLOR : BG_COLOR);
-    disp.fillRect(CHAR_HEIGHT + RECT_SIZE, BANNER_SIZE + BUTTON_HEIGHT + (CHAR_HEIGHT*2),
-                BUTTON_HEIGHT, RECT_SIZE,
+  disp.fillRect(0, BANNER_SIZE * CHAR_HEIGHT,
+                RECT_SIZE, RECT_SIZE,
                 on_off ? HB_COLOR : BG_COLOR);
 }
 #endif
@@ -423,9 +419,9 @@ void display::cat_activity(void) {
   const byte RECT_SIZE = 4;
   static bool on_off = false;
   on_off = !on_off;
-  disp.fillRect(CHAR_HEIGHT + RECT_SIZE, BANNER_SIZE + BUTTON_HEIGHT + (CHAR_HEIGHT*3) + RECT_SIZE,
-                BUTTON_HEIGHT, RECT_SIZE,
-                on_off ? CAT_HB_COLOR : BG_COLOR);
+  disp.fillRect(0, BANNER_SIZE * CHAR_HEIGHT + RECT_SIZE,
+                RECT_SIZE, RECT_SIZE,
+                on_off ? CAT_HB_COLOR : BANNER_BG);
 }
 #endif
 

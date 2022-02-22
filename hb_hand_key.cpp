@@ -9,11 +9,9 @@ void hand_key(void) {
             || (last_ptt == 0);                        // PTT pressed
   if (old_state != down) {
     old_state = down;
-    tx_timeout = 0;
     if (!radio_obj.cw_tx) {
       radio_obj.set_cw_tx(true);
       cw_tx_change_state = true;
-      
     }
     radio_obj.sidetone(down);
     digitalWrite(CW_KEY, down);

@@ -12,16 +12,16 @@
 const byte BUTTON_CANCEL  = 29;
 
 #ifdef USE_HAM_BAND
-const byte BUTTON_160M    = 10;
-const byte BUTTON_80M     = 11;
-const byte BUTTON_60M     = 12; 
-const byte BUTTON_40M     = 13;
-const byte BUTTON_30M     = 14;
-const byte BUTTON_20M     = 15;
-const byte BUTTON_17M     = 16;
-const byte BUTTON_15M     = 17;
-const byte BUTTON_12M     = 18;
-const byte BUTTON_10M     = 19;
+const byte BUTTON_160M    =  5;
+const byte BUTTON_80M     =  6;
+const byte BUTTON_60M     =  7; 
+const byte BUTTON_40M     =  8;
+const byte BUTTON_30M     =  9;
+const byte BUTTON_20M     = 10;
+const byte BUTTON_17M     = 11;
+const byte BUTTON_15M     = 12;
+const byte BUTTON_12M     = 13;
+const byte BUTTON_10M     = 14;
 
 const byte BTN_OFFSET = 10;
 #else

@@ -11,39 +11,39 @@
  * value can be changed to move buttons around
  */
 
-const byte FREQ_DISP_A1 = 0;//6; 
-const byte FREQ_DISP_A2 = 1;//7; 
-const byte FREQ_DISP_B1 = 3;//8;
-const byte FREQ_DISP_B2 = 4;//9;
+const byte FREQ_DISP_A1 = 6;
+const byte FREQ_DISP_A2 = 7;
+const byte FREQ_DISP_B1 = 8;
+const byte FREQ_DISP_B2 = 9;
 
 #if defined USE_HAM_BAND || defined USE_BC_BAND
-  const byte BUTTON_BAND  = 10;
+  const byte BUTTON_BAND  = 22;
 #endif
 
 #ifdef USE_ATTN
 const byte BUTTON_ATTN  = 21;
 #endif
 #ifdef USE_LOCK
-const byte BUTTON_LOCK  = 20;
+const byte BUTTON_LOCK  = 18;
 #endif
-const byte BUTTON_SETUP = 18;
+const byte BUTTON_SETUP = 15;
 const byte BUTTON_SPLIT = 11;
-const byte BUTTON_MODE  = 15;
+const byte BUTTON_MODE  =  5;
 const byte BUTTON_STEP  = 12;
-const byte BUTTON_FINP  = 13;
+const byte BUTTON_FINP  = 16;
 #ifdef USE_TUNE
-const byte BUTTON_TUNE  = 17;
+const byte BUTTON_TUNE  = 20;
 #endif
 const byte BUTTON_CWS   = 19;
-const byte BUTTON_RIT   = 16;
+const byte BUTTON_RIT   = 10;
 #ifdef USE_SPOT
-const byte BUTTON_SPOT  = 22;
+const byte BUTTON_SPOT  = 17;
 #endif
 #ifdef USE_IF_SHIFT
-const byte BUTTON_IF_SHIFT = 23;
+const byte BUTTON_IF_SHIFT = 14;
 #endif
 #if defined USE_RF_SHIFT || defined USE_RF_SHIFT_STEP
-const byte BUTTON_RF_SHIFT = 14;
+const byte BUTTON_RF_SHIFT = 13;
 #endif
 #ifdef USE_MAN_SAVE
 const byte BUTTON_SAVE  = 24;

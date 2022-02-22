@@ -24,20 +24,17 @@ void radio::adj_cw_speed(const bool inc) {
   loop_master::active->update_cw_speed_display();
 }
 
-
 void main_loop::update_cw_speed(void) {
   highlight_clear_button(BUTTON_CWS, false);
   if (radio_obj.in_cw_speed) {
-    //disp.display_vfoa(true);
+    disp.display_vfoa(true);
     disp.display_cw_speed(false);
   } else {
     disp.display_cw_speed(true);
-    //disp.display_vfoa(false);
+    disp.display_vfoa(false);
   }
 }
 
-
 void main_loop::update_cw_speed_display(void) {
   disp.display_cw_speed(false);
-  
 }
