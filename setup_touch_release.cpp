@@ -1,3 +1,6 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
+
 #include "setup.h"
 #include "setup_buttons.h"
 #include "radio.h"
@@ -72,3 +75,4 @@ void setup_loop::touch_release(const byte button) {
       break;
   }
 }  
+#endif

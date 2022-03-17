@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "setup.h"
 #include "setup_buttons.h"
 #include "loop_master.h"
@@ -45,3 +47,4 @@ void setup_loop::button_setup(void) {
                     | BUTTON_BIT(BUTTON_SAVE)
                     ;
 }
+#endif

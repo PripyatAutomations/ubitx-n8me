@@ -76,7 +76,9 @@ void CATcheck(void) {
         case CAT_SET_MODE:
           temp1 = cmd_buffer[0];
           if (temp1 < 4) {
+#if	defined(USE_CW)
             radio_obj.toggle_cw((temp1 & 0b10));
+#endif
             radio_obj.toggle_usb((temp1 & 0b01));
             Serial.write(0x00);
           }

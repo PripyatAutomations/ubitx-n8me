@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "main_loop.h"
 #include "main_buttons.h"
 #include "display.h"
@@ -5,6 +6,7 @@
 
 void main_loop::hold_release(const byte button) {
   switch (button) {
+#if	defined(USE_DISPLAY)
     case BUTTON_RIT:
       radio_obj.toggle_rit(true);
       break;
@@ -62,7 +64,7 @@ void main_loop::hold_release(const byte button) {
       radio_obj.write_memory_eeprom(4);
       break;
     #endif
-      
+#endif      
     case SWITCH:
       #ifdef USE_IF_SHIFT
       if (radio_obj.in_if_shift) radio_obj.toggle_if_shift(true);

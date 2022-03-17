@@ -12,9 +12,17 @@ void radio::rotary(const bool inc) {
       adj_rit(inc);
       break;
 
+#if	defined(USE_CW)
     case RM_CWS:
       radio_obj.adj_cw_speed(inc);
       break;
+    case RM_CWP:
+      radio_obj.adj_cw_pitch(inc);
+      break;
+    case RM_DELAY:
+      radio_obj.adj_cw_delay(inc);
+      break;
+#endif
 
     #ifdef USE_IF_SHIFT
       case RM_IF_SHIFT:
@@ -22,10 +30,8 @@ void radio::rotary(const bool inc) {
         break;
     #endif
 
-    case RM_CWP:
-      radio_obj.adj_cw_pitch(inc);
-      break;
 
+#if	defined(USE_DISPLAY)
     case RM_BFO:
       radio_obj.adj_bfo(inc);
       break;
@@ -33,10 +39,7 @@ void radio::rotary(const bool inc) {
     case RM_FREQ:
       radio_obj.adj_master_cal(inc);
       break;
-
-    case RM_DELAY:
-      radio_obj.adj_cw_delay(inc);
-      break;
+#endif
 
     #ifdef USE_TUNE
       case RM_TUNE_PWR:

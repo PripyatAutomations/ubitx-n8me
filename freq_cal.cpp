@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "display.h"
 #include "radio.h"
 #include "loop_master.h"
@@ -33,3 +35,4 @@ void setup_loop::update_freq_cal(void) {
 void setup_loop::update_freq_cal_display(void) {
   disp.display_freq_cal(false);
 }
+#endif

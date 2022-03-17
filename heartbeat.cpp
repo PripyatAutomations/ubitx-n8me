@@ -33,9 +33,11 @@ void heartbeat_begin(void) {
   TCCR0A = _BV(WGM01);                             // turn on CTC mode
   TCCR0B = _BV(CS02);                              // set 256 prescaler
 
+#if	defined(USE_CW)
   // setup analog inpurt for keyer
   analogReference(DEFAULT);
   pinMode(ANALOG_KEYER, INPUT_PULLUP);
+#endif
 }
 
 
@@ -56,11 +58,15 @@ ISR(TIMER2_COMPA_vect) {
   timer0_millis += 8;   // 125 Hz = 8 msec
              
   tick_125Hz = true;
+
+#if	defined(USE_DISPLAY)
   if (!touchscreen_ct--) {
     touchscreen_ct = TOUCHSCREEN_CT;
     tick_touchscreen = true;
   }
+#endif
 
+#if	defined(USE_CW)
   if (radio_obj.vfo_data[radio_obj.using_vfo_b].cw) {
     switch (radio_obj.cw_key_type) {
       case KT_HAND:
@@ -84,11 +90,14 @@ ISR(TIMER2_COMPA_vect) {
       }
     }
   } else {
+#endif
     if (ptt_change_millis && (timer0_millis - ptt_change_millis) > SWITCH_DEBOUNCE) {
       ptt_change_millis = 0;
       ptt_state = last_ptt ? PTT_UP : PTT_DOWN; 
     } 
+#if	defined(USE_CW)
   } 
+#endif
 
   #ifdef ROTARY_X2
   if (timer0_millis - encoder_change_millis > ENCODER_DEBOUNCE) {

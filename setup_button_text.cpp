@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "setup.h"
 #include "setup_buttons.h"
 #include "str_buffer.h"
@@ -53,3 +55,4 @@ void setup_loop::button_text(const byte button) {
       break;    
   }
 }
+#endif

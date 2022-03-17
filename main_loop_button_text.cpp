@@ -1,3 +1,6 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
+
 #include "main_loop.h"
 #include "main_buttons.h"
 #include "str_buffer.h"
@@ -97,3 +100,4 @@ void main_loop::button_text(const byte button) {
     #endif
   }
 }
+#endif

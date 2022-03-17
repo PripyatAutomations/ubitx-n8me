@@ -1,3 +1,6 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
+
 #include "nano_font.h"
 #include <avr/pgmspace.h>
 
@@ -16,3 +19,4 @@
 // const GFXfont* ubitx_font = &Consolas5;
 // const GFXfont* ubitx_font = &Consolas8;
 // const GFXfont * ubitx_font = &Lucida_Sans_Typewriter8;
+#endif

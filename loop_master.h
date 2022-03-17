@@ -22,13 +22,13 @@ class loop_master {
   virtual void hb_125Hz(void) {};
   virtual void hb_1Hz(void) {};
   virtual void ptt_change(const bool) {};
-  virtual void touch_release(const byte) {};
   virtual void hold_release(const byte) {};
+#if	defined(USE_DISPLAY)
+  virtual void touch_release(const byte) {};
   virtual void calibration_release(void) {};
   virtual void button_setup(void) {};
   virtual void button_text(const byte) {};
   virtual bool touch(const byte) {return true;};
-
   // display update methods
   virtual void update_mode(void) {};
   virtual void update_vfo(const bool vfob) {};
@@ -52,24 +52,26 @@ class loop_master {
   #ifdef USE_TX_DIS
   virtual void update_tx_disable(void) {};
   #endif
-  virtual void update_keyer_mode(void) {};
-  #ifdef USE_PDL_POL
-  virtual void update_paddle_polarity(void) {};
-  #endif
 
+#if defined(USE_CW)
   virtual void update_cw_pitch(void) {};
   virtual void update_cw_pitch_display(void) {};
 
   virtual void update_cw_speed(void) {};
   virtual void update_cw_speed_display(void) {};
 
+  virtual void update_cw_delay(void) {};
+  virtual void update_cw_delay_display(void) {};
+  virtual void update_keyer_mode(void) {};
+  #ifdef USE_PDL_POL
+  virtual void update_paddle_polarity(void) {};
+  #endif
+#endif
+
   #ifdef USE_IF_SHIFT
   virtual void update_if_shift(void) {};
   virtual void update_if_shift_display(void) {};
   #endif
-
-  virtual void update_cw_delay(void) {};
-  virtual void update_cw_delay_display(void) {};
 
   virtual void update_freq_cal(void) {};
   virtual void update_freq_cal_display(void) {};
@@ -79,7 +81,6 @@ class loop_master {
 
   virtual void update_tune_pwr(void) {};
   virtual void update_tune_pwr_display(void) {};
-
   #ifdef USE_MEMORY
   virtual void update_memory(const byte which) {};
   #endif
@@ -93,20 +94,26 @@ class loop_master {
   virtual void update_rf_shift_step(void) {};
   #endif
 
+#endif
+
   virtual void loop(void);
   void make_active(void);
   static unsigned long touch_millis;
 
+#if defined(USE_DISPLAY)
   void init_screen(void);
+#endif
   static void do_loop(void);
 
   protected:
     static loop_master *next;
+#if defined(USE_DISPLAY)
     unsigned long draw_buttons, all_buttons, textsize1_buttons, twoline_buttons;
 
     virtual void highlight_clear_button(const byte button, bool highlight);
     Point p;  // calibrated / uncalibrated touchscreen data
     bool touchscreen_buttons;    
+#endif
       
   public:
     static loop_master *active;

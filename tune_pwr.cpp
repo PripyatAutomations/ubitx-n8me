@@ -1,3 +1,6 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
+
 #include "display.h"
 #include "radio.h"
 #include "loop_master.h"
@@ -34,4 +37,5 @@ void setup_loop::update_tune_pwr(void) {
 void setup_loop::update_tune_pwr_display(void) {
   disp.display_tune_pwr(false);
 }
+#endif
 #endif

@@ -8,10 +8,11 @@
 class main_loop : public loop_master {
   virtual void setup(void);
   virtual void ptt_change(const bool down); 
+  virtual void hold_release(const byte button);
+#if	defined(USE_DISPLAY)
   virtual void highlight_clear_button(const byte button, bool highlight);
   virtual void button_setup(void);
   virtual void touch_release(const byte button);
-  virtual void hold_release(const byte button);
   virtual void button_text(const byte button);
   virtual bool touch(const byte button);
 
@@ -32,6 +33,7 @@ class main_loop : public loop_master {
   #ifdef USE_LOCK
   virtual void update_lock(void);
   #endif
+#if	defined(USE_CW)
   virtual void update_cw_speed(void);
   virtual void update_cw_speed_display(void);
   #ifdef USE_SPOT
@@ -50,6 +52,8 @@ class main_loop : public loop_master {
   #ifdef USE_RF_SHIFT_STEP
   virtual void update_rf_shift_step(void);
   #endif
+#endif
+#endif
 };
 
 extern main_loop loop_main;

@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_CW)
 #include "heartbeat.h"
 #include "radio.h"
 
@@ -59,3 +61,4 @@ void iambic_key(void) {
     }
   }
 }
+#endif

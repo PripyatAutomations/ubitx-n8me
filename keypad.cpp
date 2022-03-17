@@ -1,3 +1,6 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
+
 #include "keypad.h"
 #include "loop_master.h"
 #include "display.h"
@@ -110,3 +113,4 @@ void keypad_loop::touch_release(const byte button) {
 }
 
 keypad_loop loop_keypad;
+#endif

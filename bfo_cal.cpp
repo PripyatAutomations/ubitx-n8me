@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "display.h"
 #include "radio.h"
 #include "loop_master.h"
@@ -34,3 +36,4 @@ void setup_loop::update_bfo_cal(void) {
 void setup_loop::update_bfo_cal_display(void) {
   disp.display_bfo_cal(false);
 }
+#endif

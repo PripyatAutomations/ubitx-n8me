@@ -27,6 +27,7 @@ void loop_master::do_loop(void) {
   active->loop();
 }
 
+#if	defined(USE_DISPLAY)
 void loop_master::init_screen(void) {
   touchscreen_buttons = true;
   init();
@@ -46,13 +47,17 @@ void loop_master::init_screen(void) {
     }
   }
 }
+#endif
 
 void loop_master::make_active(void) {
     active = this;
+#if	defined(USE_DISPLAY)
     init_screen();
+#endif
     setup();
 }
 
+#if	defined(USE_DISPLAY)
 void loop_master::highlight_clear_button(const byte button, bool highlight) {
   if (BUTTON_BIT(button) & draw_buttons) {
     str_buffer1[0] = str_buffer2[0] = '\0';
@@ -62,6 +67,7 @@ void loop_master::highlight_clear_button(const byte button, bool highlight) {
        BUTTON_BIT(button) & twoline_buttons);
   }
 }
+#endif
 
 void loop_master::loop(void) {
   static byte highlight = 255;
@@ -70,11 +76,12 @@ void loop_master::loop(void) {
   static byte beep_ct;
   long cur_millis = millis();
 
-
+#if	defined(USE_CW)
   if (cw_tx_change_state) {
     cw_tx_change_state = false;
     radio_obj.set_cw_oscillators();
   }
+#endif
 
   if (rotary_state > R_INACTIVE) {
     radio_obj.rotary(rotary_state == R_INC);
@@ -89,7 +96,9 @@ void loop_master::loop(void) {
 
   if (switch_state > S_INACTIVE) {
     if (switch_state == S_LONG) hold_release(SWITCH);
+#if	defined(USE_DISPLAY)
     else touch_release(SWITCH);
+#endif
     switch_state = S_INACTIVE;
     return;
   }
@@ -100,6 +109,7 @@ void loop_master::loop(void) {
     need_sw_beep = false;
   }
 
+#if	defined(USE_DISPLAY)
   if (tick_touchscreen) {
     tick_touchscreen = false;
     if (touchscreen_buttons) {
@@ -152,6 +162,7 @@ void loop_master::loop(void) {
       }
     }
   }
+#endif
 
   if (tick_125Hz) {
     tick_125Hz = false;

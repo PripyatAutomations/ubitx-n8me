@@ -1,9 +1,10 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "display.h"
 #include <SPI.h>
 
 #include "radio.h"
 #include "str_buffer.h"
-#include "defines.h"
 #include "texts.h"
 #include "PDQ_MinLib/PDQ_ILI9341_config.h"
 #include "PDQ_MinLib/PDQ_ILI9341.h"
@@ -426,3 +427,4 @@ void display::cat_activity(void) {
 #endif
 
 display disp;
+#endif

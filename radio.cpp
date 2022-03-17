@@ -32,7 +32,9 @@ long radio::freq_60m(void) {
 void radio::set_60m(void) {
   chan_60m = 1;
   vfo_data[using_vfo_b].usb = true;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_mode();
+#endif
   set_frequency(freq_60m());
 }
 
@@ -59,6 +61,7 @@ const char * const radio::step_names[] PROGMEM = {
   STEP_10K
 };
 
+#if	defined(USE_CW)
 const char * const radio::keyer_names[] PROGMEM = {
   KEYER_HAND, KEYER_IAMA, 
   #ifdef USE_WINKEY
@@ -67,6 +70,7 @@ const char * const radio::keyer_names[] PROGMEM = {
   KEYER_IAMB
   #endif
 };
+#endif
 
 void radio::begin(void) {
   read_eeprom();
@@ -120,7 +124,9 @@ void radio::adj_frequency(const bool inc) {
     vfo_data[using_vfo_b].frequency = chan_60m
       ? freq_60m()
       : adj_range(vfo_data[using_vfo_b].frequency, inc, step_amount, MIN_FREQ, MAX_FREQ);
+#if	defined(USE_DISPLAY)
     loop_master::active->update_vfo(using_vfo_b);
+#endif
     #ifdef USE_AUTO_SAVE
     autosave_freq_change(using_vfo_b);
     #endif
@@ -151,43 +157,59 @@ void radio::set_step(const FREQ_STEP step) {
   calc_step_amount();
   vfo_data[using_vfo_b].frequency -= vfo_data[using_vfo_b].frequency % step_amount;
   rit_amount -= (rit_amount % step_amount);
+#if	defined(USE_DISPLAY)
   loop_master::active->update_vfo(using_vfo_b);
   loop_master::active->update_step();
+#endif
   setHWFrequencyRX();
 }
 
+#if	defined(USE_CW)
 void radio::toggle_cw(void) {
   vfo_data[using_vfo_b].cw = !vfo_data[using_vfo_b].cw;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_mode();
+#endif
   if (chan_60m) {
     vfo_data[using_vfo_b].frequency = freq_60m();
+#if	defined(USE_DISPLAY)
     loop_master::active->update_vfo(using_vfo_b);
+#endif
   }
   setHWFrequencyRX();
 }
 
 void radio::toggle_cw(const bool on) {
   vfo_data[using_vfo_b].cw = on;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_mode();
+#endif
   setHWFrequencyRX();
 }
+#endif
 
 void radio::toggle_usb(void) { 
   vfo_data[using_vfo_b].usb = !vfo_data[using_vfo_b].usb;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_mode();
+#endif
   setHWFrequencyRX();
 }
 
 void radio::toggle_usb(const bool usb) {
   vfo_data[using_vfo_b].usb = usb;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_mode();
+#endif
   setHWFrequencyRX();
 }
 
+#if	defined(USE_DISPLAY)
 void radio::update_both_vfos(void) {
   loop_master::active->update_vfo(false);
   loop_master::active->update_vfo(true);
 }
+#endif
 
 void radio::eq_vfo(const bool to_vfob) {
   vfo_data[!to_vfob] = vfo_data[to_vfob];
@@ -195,14 +217,18 @@ void radio::eq_vfo(const bool to_vfob) {
   autosave_freq_change(!to_vfob);
   #endif
   calc_step_amount();
+#if	defined(USE_DISPLAY)
   update_both_vfos();
   #ifdef USE_ATTN
     set_attn();
     loop_master::active->update_attn();
   #endif
+#endif
   setHWFrequencyRX();
+#if	defined(USE_DISPLAY)
   loop_master::active->update_step();
   loop_master::active->update_mode();
+#endif
 }
 
 long radio::adjusted_frequency(const bool vfob) {
@@ -242,16 +268,19 @@ void radio::set_ptt(const bool on) {
     digitalWrite(TX_RX, 0);
     setHWFrequencyRX();
   }
+#if	defined(USE_DISPLAY)
   update_both_vfos();
+#endif
 }  
 
+#if	defined(USE_CW)
 void radio::set_cw_tx(const bool on) {
   in_tx = cw_tx = on;
   
   digitalWrite(TX_RX, 0);
   digitalWrite(CW_KEY, 0);  
 }  
-
+#endif
 
 void radio::set_rit(const bool on) {
   rit = on;
@@ -269,10 +298,14 @@ bool radio::set_frequency(const long freq)
     rit_amount = 0;
     rit = false;
     vfo_data[using_vfo_b].frequency = freq - freq % step_amount;
-  
+
+#if	defined(USE_DISPLAY)  
     loop_master::active->update_vfo(using_vfo_b);
+#endif
     setHWFrequencyRX();    
+#if	defined(USE_DISPLAY)  
     loop_master::active->update_rit();
+#endif
     return true;
   }
 }
@@ -317,11 +350,13 @@ void radio::set_band(const RADIO_BAND band) {
   if (read_vfo_eeprom(band, vfo)) {
     vfo_data[using_vfo_b] = vfo;
     calc_step_amount();
+#if	defined(USE_DISPLAY)
     loop_master::active->update_step();
     loop_master::active->update_mode();
     #ifdef USE_ATTN
     loop_master::active->update_attn();
     #endif
+#endif
     set_frequency(vfo.frequency);
   } else {
     // if nothing in memory, set to center of band
@@ -394,7 +429,9 @@ void radio::toggle_attn(void)
   vfo_data[using_vfo_b].attn = !vfo_data[using_vfo_b].attn;
   set_attn();
   setHWFrequencyRX();
+#if	defined(USE_DISPLAY)
   loop_master::active->update_attn();
+#endif
 }
 #endif
 
@@ -419,6 +456,7 @@ void radio::initPorts(void) {
 void radio::set_active_vfob(const bool do_vfob) {
   using_vfo_b = do_vfob;
   calc_step_amount();
+#if	defined(USE_DISPLAY)
   update_both_vfos();
   loop_master::active->update_mode();
   loop_master::active->update_step();
@@ -426,6 +464,7 @@ void radio::set_active_vfob(const bool do_vfob) {
   loop_master::active->update_attn();
   set_attn();
   #endif
+#endif
   setHWFrequencyRX();
 }
 
@@ -444,8 +483,10 @@ const char * const radio::step_name(void)  {
 
 void radio::toggle_split(void) {
   split = !split;
+#if	defined(USE_DISPLAY)
   update_both_vfos();
   loop_master::active->update_split();
+#endif
 }
 
 void radio::toggle_split(const bool on) {
@@ -457,19 +498,25 @@ void radio::toggle_split(const bool on) {
 void radio::toggle_spot(void) {
   spot = !spot;
   sidetone(spot);
+#if	defined(USE_DISPLAY)
   loop_master::active->update_spot();
+#endif
 }
 #endif
 
 #ifdef USE_LOCK
 void radio::toggle_lock(const bool on) {
   lock = on;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_lock();
+#endif
 }
 
 void radio::toggle_lock(void) {
   lock = !lock;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_lock();
+#endif
 }
 #endif
 
@@ -493,33 +540,44 @@ void radio::toggle_rit(const bool reset) {
     rit = !rit;
   rotary_mode = rit ? RM_RIT : RM_VFO;
   setHWFrequencyRX();  
+#if	defined(USE_DISPLAY)
   loop_master::active->update_rit();
   update_both_vfos();
+#endif
 }
 
 void radio::adj_rit(const bool inc) {
   rit_amount = adj_range(rit_amount, inc, step_amount, -RIT_LIMIT, RIT_LIMIT);
   setHWFrequencyRX();  
+#if	defined(USE_DISPLAY)
   update_both_vfos();
+#endif
 }
 
-
+#if	defined(USE_CW)
 #ifdef USE_PDL_POL
 void radio::toggle_paddle_polarity(void) {
   paddle_reverse = !paddle_reverse;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_paddle_polarity();
+#endif
 }
 #endif
 
 void radio::inc_keyer(void) {
   cw_key_type = ((cw_key_type == KT_MAX) ? KT_MIN : (KEYER_TYPE)(cw_key_type + 1));
+#if	defined(USE_DISPLAY)
   loop_master::active->update_keyer_mode();
+#endif
 }
+#endif
 
 #ifdef USE_TX_DIS
 void radio::toggle_tx_disable(void) {
   tx_enable = !tx_enable;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_tx_disable();
+#endif
 }
 #endif
 
@@ -552,6 +610,8 @@ void radio::inc_rf_shift_step(const bool reset) {
   }
   rf_shift_freq = firstIF + (rf_attn_step ? pgm_read_byte_near(RF_SHIFT_STEPS + rf_attn_step - 1) * 1000L : 0);
   setHWFrequencyRX();
+#if	defined(USE_DISPLAY)
   loop_master::active->update_rf_shift_step();
+#endif
 }
 #endif

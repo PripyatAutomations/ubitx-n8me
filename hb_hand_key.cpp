@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_CW)
 #include "heartbeat.h"
 #include "rotary.h"
 #include "radio.h"
@@ -20,3 +22,4 @@ void hand_key(void) {
     }
   }
 }
+#endif

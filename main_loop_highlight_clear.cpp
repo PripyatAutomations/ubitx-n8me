@@ -1,3 +1,6 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
+
 #include "main_loop.h"
 #include "main_buttons.h"
 #include "radio.h"
@@ -37,3 +40,4 @@ void main_loop::highlight_clear_button(const byte button, bool highlight) {
   }
   loop_master::highlight_clear_button(button, highlight);
 };
+#endif

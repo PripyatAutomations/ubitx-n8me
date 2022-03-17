@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "touchscreen_calibration.h"
 #include "display.h"
 #include "texts.h"
@@ -69,3 +71,4 @@ void ts_calibration_loop::touch_release(const byte button) {
 }
 
 ts_calibration_loop loop_ts_calibration;
+#endif

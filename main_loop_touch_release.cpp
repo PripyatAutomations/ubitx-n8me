@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "main_loop.h"
 #include "main_buttons.h"
 #include "band.h"
@@ -135,3 +137,4 @@ void main_loop::touch_release(const byte button) {
     break;
   } 
 }
+#endif

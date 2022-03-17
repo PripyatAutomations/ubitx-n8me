@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "main_loop.h"
 #include "main_buttons.h"
 
@@ -73,3 +75,4 @@ void main_loop::button_setup(void) {
                   #endif
                   ;
 }
+#endif

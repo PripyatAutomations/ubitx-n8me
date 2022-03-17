@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "setup.h"
 #include "setup_buttons.h"
 #include "radio.h"
@@ -21,3 +23,4 @@ void setup_loop::highlight_clear_button(const byte button, bool highlight) {
     highlight = !highlight;
   loop_master::highlight_clear_button(button, highlight);
 };
+#endif

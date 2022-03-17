@@ -1,0 +1,21 @@
+This tree may sometimes be broken.. I'm working on adding a stripped down CAT-only build mode
+which should save a significant amount of space by removing display and CW features.
+
+
+So far we've gone from 30kbytes down to about 9kbytes. Plenty of room for ampduino symbiote ;)
+
+
+All bugs are probably mine, so do not complain to N8ME.
+
+Thanks for the great firmware, Mark!
+
+ 
+Original source: uBITX_6_N8ME_2_VU3GAO_Mods
+
+This version of N8ME's firmware has been modified as follows:
+ * Added install-prereqs.sh script to put arduino toolchain in /opt/
+ * Added GNU makefiles to allow building without arduino IDE and the java mess that entails.
+ * Added support for LoRA based communication with ATU-100 and optional remote amplifier
+
+Once again, please do not ask N8ME for support with this version of the firmware!
+ 

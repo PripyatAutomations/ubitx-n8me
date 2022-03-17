@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_CW)
 #include "heartbeat.h"
 #include "radio.h"
 
@@ -13,4 +15,5 @@ void tune(void) {
     tune_counter = 0;  
   }
 }
+#endif
 #endif

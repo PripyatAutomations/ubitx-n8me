@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "setup.h"
 #include "setup_buttons.h"
 #include "radio.h"
@@ -18,4 +20,5 @@ void setup_loop::update_keyer_mode(void) {
 void setup_loop::update_tx_disable(void) {
   highlight_clear_button(BUTTON_TX_DISABLE, false);
 }
+#endif
 #endif

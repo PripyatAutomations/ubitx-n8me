@@ -4,6 +4,7 @@
 #include "display.h"
 #include "str_buffer.h"
 
+#if defined(USE_DISPLAY)
 void main_loop::update_vfo(const bool vfob) {
   if (vfob) disp.display_vfob(false);
   else disp.display_vfoa(false);
@@ -64,3 +65,4 @@ void main_loop::update_rf_shift_step(void) {
 }
 #endif
 
+#endif

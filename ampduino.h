@@ -1,3 +1,3 @@
-#if	!defined(_atu_100_h)
-#define	__atu_100_h
+#if	!defined(_ampduino_h)
+#define	_ampduino_h
 #endif

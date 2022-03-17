@@ -1,7 +1,8 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
 #include "touch.h"
 
 #include "radio.h"
-#include "defines.h"
 #include "pins.h"
 #include "display.h"
 #include "point.h"
@@ -171,3 +172,4 @@ void scaleTouch(Point &p) {
   #endif
   #endif
 }
+#endif

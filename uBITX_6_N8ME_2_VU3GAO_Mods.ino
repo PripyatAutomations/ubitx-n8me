@@ -19,7 +19,9 @@ void setup() {
     Serial.flush();
   #endif
 
+#if	defined(USE_DISPLAY)
   disp.begin();
+#endif
 
   radio_obj.begin();
 
@@ -30,7 +32,9 @@ void setup() {
   // start after loop installed for ISR handling
   rotary_begin();
   heartbeat_begin();
+#if	defined(USE_DISPLAY)
   initTouch();
+#endif
 }
 
 void loop() {

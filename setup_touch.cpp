@@ -1,3 +1,6 @@
+#include "defines.h"
+#if	defined(USE_DISPLAY)
+
 #include "setup.h"
 #include "setup_buttons.h"
 #include "radio.h"
@@ -57,3 +60,5 @@ bool setup_loop::touch(const byte button) {
   }
   return true;
 }
+
+#endif

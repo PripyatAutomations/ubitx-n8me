@@ -27,7 +27,9 @@ void radio::set_cw_oscillators(void) {
     si5351bx_setfreq(0, radio_obj.usbCarrier);
     setHWFrequencyRX();
   }
+#if	defined(USE_DISPLAY)
   update_both_vfos();
+#endif
 }
 
 #ifdef USE_TUNE

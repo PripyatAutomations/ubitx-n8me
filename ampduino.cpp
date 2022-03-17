@@ -8,4 +8,9 @@
  *
  * Plans to support LoRA or ESP MESH are under review
  */
+#include "defines.h"
+
+#if	defined(USE_AMPDUINO)
 #include "ampduino.h"
+
+#endif

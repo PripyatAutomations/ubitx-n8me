@@ -1,3 +1,5 @@
+#include "defines.h"
+#if	defined(USE_CW)
 #include "radio.h"
 #include "display.h"
 #include "main_loop.h"
@@ -8,22 +10,29 @@
 const byte CWS_DIGITS = 2;
 
 void display::display_cw_speed(const bool clear) {
+#if	defined(USE_DISPLAY)
   update_info_number(clear ? __LONG_MAX__ : radio_obj.cw_speed, CWS_DIGITS, INFO_TEXT_SIZE, false);
+#endif
 }
 
 void radio::toggle_cw_speed(void) {
   in_cw_speed = !in_cw_speed;
   rotary_mode = in_cw_speed ? RM_CWS : RM_VFO;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_cw_speed();
   if (in_cw_speed) loop_master::active->update_cw_speed_display();
+#endif
 }
 
 void radio::adj_cw_speed(const bool inc) {
   cw_speed = adj_range(cw_speed, inc, 1, MIN_CWS, MAX_CWS);
   cw_millis = 1200 / cw_speed;
+#if	defined(USE_DISPLAY)
   loop_master::active->update_cw_speed_display();
+#endif
 }
 
+#if	defined(USE_DISPLAY)
 void main_loop::update_cw_speed(void) {
   highlight_clear_button(BUTTON_CWS, false);
   if (radio_obj.in_cw_speed) {
@@ -38,3 +47,5 @@ void main_loop::update_cw_speed(void) {
 void main_loop::update_cw_speed_display(void) {
   disp.display_cw_speed(false);
 }
+#endif
+#endif

@@ -1,3 +1,6 @@
+#include "defines.h"
+#if	defined(USE_CW)
+
 #include "heartbeat.h"
 #include "rotary.h"
 #include "radio.h"
@@ -23,3 +26,4 @@ void winkeyer_key(void) {
     digitalWrite(CW_KEY, old_cw);
   }
 }
+#endif
